@@ -1,0 +1,74 @@
+const list = document.getElementById("list");
+document.getElementById("count").textContent =
+  PROMPTS.length + " อารมณ์ แตะปุ่มเพื่อคัดลอก";
+
+function fullPrompt(item) {
+  return PREFIX + item.prompt + SUFFIX;
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    // fallback สำหรับเบราว์เซอร์ที่ไม่รองรับ clipboard API
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+}
+
+function makeCard(item) {
+  const text = fullPrompt(item);
+
+  const card = document.createElement("article");
+  card.className = "card";
+  card.dataset.mood = item.mood;
+
+  const badge = document.createElement("div");
+  badge.className = "badge";
+  badge.setAttribute("aria-hidden", "true");
+  badge.textContent = item.emoji;
+
+  const title = document.createElement("div");
+  title.className = "title";
+  const h2 = document.createElement("h2");
+  h2.textContent = item.th;
+  const en = document.createElement("p");
+  en.textContent = item.en;
+  title.append(h2, en);
+
+  const prompt = document.createElement("p");
+  prompt.className = "prompt";
+  prompt.textContent = text;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "copy";
+  btn.textContent = "คัดลอก prompt";
+
+  let timer;
+  btn.addEventListener("click", async () => {
+    const ok = await copyText(text);
+    btn.textContent = ok ? "คัดลอกแล้ว" : "คัดลอกไม่ได้ ลองกดค้างที่ข้อความ";
+    btn.classList.toggle("done", ok);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      btn.textContent = "คัดลอก prompt";
+      btn.classList.remove("done");
+    }, 1600);
+  });
+
+  card.append(badge, title, prompt, btn);
+  return card;
+}
+
+PROMPTS.forEach((item) => list.appendChild(makeCard(item)));
