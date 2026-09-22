@@ -1,6 +1,6 @@
 const list = document.getElementById("list");
 document.getElementById("count").textContent =
-  PROMPTS.length + " อารมณ์ แตะปุ่มเพื่อคัดลอก";
+  PROMPTS.length + " รายการ แตะปุ่มเพื่อคัดลอก";
 
 function fullPrompt(item) {
   return PREFIX + item.prompt + SUFFIX;
@@ -20,7 +20,11 @@ async function copyText(text) {
     document.body.appendChild(ta);
     ta.select();
     let ok = false;
-    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    try {
+      ok = document.execCommand("copy");
+    } catch (err) {
+      ok = false;
+    }
     document.body.removeChild(ta);
     return ok;
   }
@@ -33,22 +37,9 @@ function makeCard(item) {
   card.className = "card";
   card.dataset.mood = item.mood;
 
-  const badge = document.createElement("div");
-  badge.className = "badge";
-  badge.setAttribute("aria-hidden", "true");
-  badge.textContent = item.emoji;
-
-  const title = document.createElement("div");
+  const title = document.createElement("h2");
   title.className = "title";
-  const h2 = document.createElement("h2");
-  h2.textContent = item.th;
-  const en = document.createElement("p");
-  en.textContent = item.en;
-  title.append(h2, en);
-
-  const prompt = document.createElement("p");
-  prompt.className = "prompt";
-  prompt.textContent = text;
+  title.textContent = item.title;
 
   const btn = document.createElement("button");
   btn.type = "button";
@@ -67,7 +58,7 @@ function makeCard(item) {
     }, 1600);
   });
 
-  card.append(badge, title, prompt, btn);
+  card.append(title, btn);
   return card;
 }
 

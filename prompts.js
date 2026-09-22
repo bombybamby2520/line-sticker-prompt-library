@@ -1,94 +1,121 @@
 // ===== แก้ตรงนี้ได้ =====
 // ข้อความที่จะต่อหน้า/ท้ายทุก prompt ตอนกดคัดลอก (ใส่ชื่อตัวละคร/สไตล์ของตัวเองได้)
 // ถ้าไม่ต้องการ ให้เปลี่ยนเป็น "" (ว่าง)
-const PREFIX = "cute chibi character, ";
-const SUFFIX = ", LINE sticker style, thick outline, simple white background";
+const PREFIX = "";
+const SUFFIX = "";
+
+// ตัวช่วย: ตัดช่องว่างหน้าแต่ละบรรทัดออก เพื่อให้เขียนโค้ดแบบเยื้องสวยๆ ได้
+// โดยไม่ทำให้ข้อความที่คัดลอกจริงมีช่องว่างเกินมา (ไม่ต้องเข้าใจก็ใช้ได้เลย)
+function dedent(str) {
+  const lines = str
+    .replace(/^\n/, "")
+    .replace(/\n[ \t]*$/, "")
+    .split("\n");
+  const indents = lines
+    .filter((l) => l.trim())
+    .map((l) => l.match(/^[ \t]*/)[0].length);
+  const min = indents.length ? Math.min(...indents) : 0;
+  return lines.map((l) => l.slice(min)).join("\n");
+}
 
 // mood ที่ใช้ได้: happy, love, sad, mad, wow, tired  (กำหนดสีการ์ด)
 const PROMPTS = [
-  { th: "หัวเราะลั่น", en: "Laughing out loud", emoji: "😂", mood: "happy",
-    prompt: "laughing out loud, eyes squeezed shut, mouth wide open, holding belly with both hands" },
-  { th: "ยิ้มกว้าง", en: "Big smile", emoji: "😄", mood: "happy",
-    prompt: "big cheerful smile, bright eyes, waving one hand" },
-  { th: "ดีใจสุดๆ", en: "Overjoyed", emoji: "🥳", mood: "happy",
-    prompt: "jumping with joy, both arms raised high, confetti around, mouth open in a cheer" },
-  { th: "ภูมิใจ", en: "Proud", emoji: "😎", mood: "happy",
-    prompt: "proud expression, chest puffed out, chin up, hands on hips, small sparkle" },
-  { th: "ตื่นเต้น", en: "Excited", emoji: "🤩", mood: "happy",
-    prompt: "sparkling star eyes, fists clenched near chest, bouncing with excitement" },
-  { th: "สบายใจ", en: "Content and relaxed", emoji: "😌", mood: "happy",
-    prompt: "relaxed content smile, eyes gently closed, shoulders down, soft blush" },
-  { th: "สู้ๆ", en: "You can do it", emoji: "💪", mood: "happy",
-    prompt: "determined smile, fist pumped in front, other arm flexing, encouraging pose" },
-  { th: "โอเค", en: "OK", emoji: "👌", mood: "happy",
-    prompt: "friendly smile, making an OK sign with one hand, slight wink" },
+  {
+    title: "1.มอร์นิ่ง",
+    emoji: "😂",
+    mood: "happy",
+    prompt: dedent(`
+      ปรับท่าทางและสีหน้า
 
-  { th: "รักเลย", en: "Heart eyes", emoji: "😍", mood: "love",
-    prompt: "heart-shaped eyes, cheeks blushing, hands clasped near cheek, floating hearts" },
-  { th: "ส่งจูบ", en: "Blowing a kiss", emoji: "😘", mood: "love",
-    prompt: "blowing a kiss with one hand, one eye winking, small heart flying away" },
-  { th: "กอด", en: "Hug", emoji: "🤗", mood: "love",
-    prompt: "warm smile, both arms wide open ready to hug, slightly leaning forward" },
-  { th: "ขอบคุณ", en: "Thank you", emoji: "🙏", mood: "love",
-    prompt: "grateful smile, palms pressed together in front of chest, slight bow" },
-  { th: "เขิน", en: "Shy and blushing", emoji: "😳", mood: "love",
-    prompt: "deeply blushing cheeks, looking away, fingers poking together, embarrassed smile" },
-  { th: "อ้อนๆ", en: "Pleading", emoji: "🥺", mood: "love",
-    prompt: "big watery puppy eyes, hands clasped under chin, pleading look, tiny pout" },
-  { th: "คิดถึง", en: "Missing you", emoji: "💭", mood: "love",
-    prompt: "gentle sad smile, hugging a pillow, looking up dreamily, small heart thought bubble" },
+      Guide:
+      น้องยืนในมุมหันข้าง เงยหน้าขึ้นเล็กน้อย ในมือถือแก้วกาแฟแบบ to go แก้วสีน้ำตาลอ่อนฝาสีดำ แววตายิ้มมองกล้อง อารมณ์มอร์นิ่งตอนเช้า
 
-  { th: "ร้องไห้โฮ", en: "Sobbing", emoji: "😭", mood: "sad",
-    prompt: "sobbing loudly, streams of tears flowing, mouth wide open, wiping eyes with fists" },
-  { th: "น้ำตาคลอ", en: "Teary-eyed", emoji: "🥲", mood: "sad",
-    prompt: "eyes welling with tears, trembling lips, forced small smile" },
-  { th: "เสียใจ", en: "Sad", emoji: "😢", mood: "sad",
-    prompt: "sad expression, head lowered, downturned mouth, one tear rolling down" },
-  { th: "น้อยใจ", en: "Sulking", emoji: "😞", mood: "sad",
-    prompt: "sulking, puffed cheeks, arms crossed, looking away, small storm cloud above head" },
-  { th: "ท้อ", en: "Discouraged", emoji: "😩", mood: "sad",
-    prompt: "slumped shoulders, head hanging, arms dangling, dark gloomy lines above head" },
-  { th: "เหงา", en: "Lonely", emoji: "🌧️", mood: "sad",
-    prompt: "sitting alone hugging knees, looking down, small rain cloud overhead" },
-  { th: "ขอโทษ", en: "Sorry", emoji: "🙇", mood: "sad",
-    prompt: "deep apologetic bow, hands pressed together, worried eyes, sweat drop" },
+      *สะพายกระเป๋าสีดำที่ไหล่
+      *ให้คงทรงผม, ขนาดของรูปร่างเอาไว้เหมือนเดิม
+      *ฉากหลังสีขาวล้วน
+      *ภาพครึ่งตัว
+    `),
+  },
 
-  { th: "โกรธ", en: "Angry", emoji: "😡", mood: "mad",
-    prompt: "furious face, furrowed eyebrows, clenched fists, steam puffing from head" },
-  { th: "หงุดหงิด", en: "Annoyed", emoji: "😒", mood: "mad",
-    prompt: "annoyed side-eye, flat mouth, one eyebrow raised, arms crossed" },
-  { th: "เบื่อ", en: "Bored", emoji: "😑", mood: "mad",
-    prompt: "deadpan bored face, half-lidded eyes, cheek resting on hand, flat mouth" },
-  { th: "ไม่เอา", en: "No way", emoji: "🙅", mood: "mad",
-    prompt: "shaking head, arms crossed in an X in front of chest, firm frown" },
-  { th: "ตกใจกลัว", en: "Scared", emoji: "😱", mood: "mad",
-    prompt: "terrified face, trembling, hands on cheeks, wide eyes, blue shiver lines" },
+  {
+    title: "2.เติมแมว",
+    emoji: "😍",
+    mood: "love",
+    prompt: dedent(`
+      ปรับท่าทางและสีหน้า
 
-  { th: "ตกใจ", en: "Shocked", emoji: "😲", mood: "wow",
-    prompt: "jaw dropped, wide round eyes, both hands raised in surprise, exclamation mark above head" },
-  { th: "อึ้ง", en: "Speechless", emoji: "😶", mood: "wow",
-    prompt: "speechless, blank stare, tiny dot mouth, big sweat drop, frozen stiff pose" },
-  { th: "งง", en: "Confused", emoji: "🤔", mood: "wow",
-    prompt: "confused look, head tilted, scratching head, question marks floating around" },
-  { th: "คิดอยู่", en: "Thinking", emoji: "🧐", mood: "wow",
-    prompt: "thinking hard, hand on chin, eyes looking up to the side, small thought bubble" },
-  { th: "ได้ไอเดีย", en: "Got an idea", emoji: "💡", mood: "wow",
-    prompt: "sudden realization, finger raised, glowing lightbulb above head, wide bright eyes" },
-  { th: "ขยิบตา", en: "Wink", emoji: "😉", mood: "wow",
-    prompt: "playful wink, one eye closed, finger gun pose, small star sparkle" },
-  { th: "แลบลิ้น", en: "Tongue out", emoji: "😜", mood: "wow",
-    prompt: "sticking tongue out, one eye winking, silly playful pose, pulling down eyelid" },
-  { th: "ยิ้มเจ้าเล่ห์", en: "Smug", emoji: "😏", mood: "wow",
-    prompt: "smug smirk, half-closed eyes, one eyebrow raised, sly grin, hand near chin" },
+      Guide: น้องนั่งชันเข่าขึ้นมาบนบีนแบ๊กเอนหลังอย่างสบายบนบีนแบ๊กสีครีม ดวงตามองกล้อง สีหน้ายิ้มอ่อนโยน มือทั้งสองจับที่แมวส้มตัวอ้วนที่อยู่บนขา อารมณ์กำลังพักผ่อนเล่นกับแมวอย่างสบายๆ 
 
-  { th: "ง่วง", en: "Sleepy", emoji: "🥱", mood: "tired",
-    prompt: "big yawn, droopy eyelids, rubbing one eye, tiny tear at corner" },
-  { th: "หลับ", en: "Sleeping", emoji: "😴", mood: "tired",
-    prompt: "fast asleep, eyes closed, snot bubble, floating Zzz, head nodding" },
-  { th: "เพิ่งตื่น", en: "Just woke up", emoji: "🛏️", mood: "tired",
-    prompt: "just woke up, messy bedhead hair, half-open sleepy eyes, stretching one arm up" },
-  { th: "เหนื่อย", en: "Exhausted", emoji: "😮‍💨", mood: "tired",
-    prompt: "exhausted, deep sigh with a puff of air, slouched body, dark circles under eyes" },
-  { th: "หิว", en: "Hungry", emoji: "🤤", mood: "tired",
-    prompt: "very hungry, drooling, hands on empty stomach, sparkling eyes staring at food" },
+      *มุมมองด้านข้าง เป็นมุมที่มองเห็นด้านข้างของตัวละคร
+      *ถอดรองเท้า
+      *ให้คงชุดเสื้อผ้า,ทรงผม, ขนาดของรูปร่างเอาไว้เหมือนเดิม 
+      *ฉากหลังสีขาวล้วน
+      *ภาพเต็มตัว
+    `),
+  },
+
+  {
+    title: "3.งอนแล้วนะ",
+    emoji: "😭",
+    mood: "sad",
+    prompt: dedent(`
+      ปรับท่าทางและสีหน้า
+
+      Guide:
+      น้องงอนทำหน้าเบะปาก แววตาดูเศร้าแบบงอนแล้วนะ
+
+      *ให้คงชุดเสื้อผ้า,ทรงผม, ขนาดของรูปร่างเอาไว้เหมือนเดิม
+      *ฉากหลังสีขาวล้วน
+      *ภาพครึ่งตัว
+    `),
+  },
+
+  {
+    title: "4.คิดถึงแล้ว",
+    emoji: "😡",
+    mood: "mad",
+    prompt: dedent(`
+      ปรับท่าทางและสีหน้า
+
+      Guide:
+      น้องนั่งขัดสมาธิบนเก้าอี้อาร์มแชร์สีครีม มือกอดตุ๊กตาหมีสีน้ำตาลไว้ที่หน้าอก สีหน้าเศร้า อารมณ์คิดถึง เหงา
+
+      *ไม่ใส่รองเท้า
+      *ให้คงทรงผม, ขนาดของรูปร่างเอาไว้เหมือนเดิม
+      *ฉากหลังสีขาวล้วน
+      *ภาพเต็มตัว    
+    `),
+  },
+
+  {
+    title: "5.อ้อน",
+    emoji: "😲",
+    mood: "wow",
+    prompt: dedent(`
+      ปรับท่าทางและสีหน้า
+
+      Guide:
+      น้องทำท่าเขิน ๆ อ้อนๆ ตัวเอนไปด้านหน้าเล็กน้อย ไหล่ห่อนิด ๆ มือสองข้างกุมแนบกันอยู่ด้านหน้าใต้คาง ยิ้มมุมปากเขิน ๆ คิ้วโค้งอ่อน แก้มชมพูระเรื่อ สายตามองกล้องแบบฟีลอ้อนวอน ขอร้อง ดูน่ารัก
+
+      *ให้คงชุดเสื้อผ้า,ทรงผม, ขนาดของรูปร่างเอาไว้เหมือนเดิม
+      *ฉากหลังสีขาวล้วน
+      *ภาพครึ่งตัว
+    `),
+  },
+
+  {
+    title: "6.หาว",
+    emoji: "🥱",
+    mood: "tired",
+    prompt: dedent(`
+      ปรับท่าทางและสีหน้า
+
+      Guide:
+      น้องกำลังง่วงยืน เอามือปิดปากเบาๆหาวเบาๆ ดวงตาปรือ แก้มชมพู
+
+      *ให้คงชุดเสื้อผ้า,ทรงผม, ขนาดของรูปร่างเอาไว้เหมือนเดิม
+      *ฉากหลังสีขาวล้วน
+      *ภาพครึ่งตัว
+    `),
+  },
 ];
