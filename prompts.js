@@ -18,7 +18,6 @@ function dedent(str) {
   return lines.map((l) => l.slice(min)).join("\n");
 }
 
-// mood ที่ใช้ได้: happy, love, sad, mad, wow, tired  (กำหนดสีการ์ด)
 const PROMPTS = [
   {
     title: "มอร์นิ่ง",
