@@ -62,9 +62,9 @@ body {
 /* ---- card ---- */
 .card {
   background: var(--card-bg);
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
   border-radius: 20px;
-  box-shadow: 5px 5px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
