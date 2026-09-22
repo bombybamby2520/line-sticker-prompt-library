@@ -30,7 +30,7 @@ async function copyText(text) {
   }
 }
 
-function makeCard(item) {
+function makeCard(item, index) {
   const text = fullPrompt(item);
 
   const card = document.createElement("article");
@@ -39,7 +39,7 @@ function makeCard(item) {
 
   const title = document.createElement("h2");
   title.className = "title";
-  title.textContent = item.title;
+  title.textContent = `${index + 1}. ${item.title}`;
 
   const btn = document.createElement("button");
   btn.type = "button";
@@ -62,4 +62,4 @@ function makeCard(item) {
   return card;
 }
 
-PROMPTS.forEach((item) => list.appendChild(makeCard(item)));
+PROMPTS.forEach((item, index) => list.appendChild(makeCard(item, index)));

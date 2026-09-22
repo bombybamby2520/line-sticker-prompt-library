@@ -21,9 +21,7 @@ function dedent(str) {
 // mood ที่ใช้ได้: happy, love, sad, mad, wow, tired  (กำหนดสีการ์ด)
 const PROMPTS = [
   {
-    title: "1.มอร์นิ่ง",
-    emoji: "😂",
-    mood: "happy",
+    title: "มอร์นิ่ง",
     prompt: dedent(`
       ปรับท่าทางและสีหน้า
 
@@ -38,9 +36,7 @@ const PROMPTS = [
   },
 
   {
-    title: "2.เติมแมว",
-    emoji: "😍",
-    mood: "love",
+    title: "เติมแมว",
     prompt: dedent(`
       ปรับท่าทางและสีหน้า
 
@@ -55,9 +51,7 @@ const PROMPTS = [
   },
 
   {
-    title: "3.งอนแล้วนะ",
-    emoji: "😭",
-    mood: "sad",
+    title: "งอนแล้วนะ",
     prompt: dedent(`
       ปรับท่าทางและสีหน้า
 
@@ -71,9 +65,7 @@ const PROMPTS = [
   },
 
   {
-    title: "4.คิดถึงแล้ว",
-    emoji: "😡",
-    mood: "mad",
+    title: "คิดถึงแล้ว",
     prompt: dedent(`
       ปรับท่าทางและสีหน้า
 
@@ -88,9 +80,7 @@ const PROMPTS = [
   },
 
   {
-    title: "5.อ้อน",
-    emoji: "😲",
-    mood: "wow",
+    title: "อ้อน",
     prompt: dedent(`
       ปรับท่าทางและสีหน้า
 
@@ -104,9 +94,7 @@ const PROMPTS = [
   },
 
   {
-    title: "6.หาว",
-    emoji: "🥱",
-    mood: "tired",
+    title: "หาว",
     prompt: dedent(`
       ปรับท่าทางและสีหน้า
 
