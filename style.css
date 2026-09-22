@@ -81,7 +81,13 @@ body {
 
 .copy {
   appearance: none;
-  border: 3px solid var(--ink);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  align-self: center;   /* หรือ flex-start / flex-end เพื่อจัดชิดซ้าย/ขวา */
+  width: 40%;            /* หรือใช้ max-width: 220px; ตามที่ต้องการ */
+  border: none;
+  outline: none;
+  box-shadow: none;
   background: var(--line-green);
   color: #fff;
   font-family: var(--font-body);
@@ -95,6 +101,17 @@ body {
     transform 0.08s ease,
     background-color 0.15s ease,
     color 0.15s ease;
+}
+
+.copy::-moz-focus-inner {
+  border: 0;
+}
+
+.copy:focus,
+.copy:focus-visible,
+.copy:active {
+  outline: none;
+  box-shadow: none;
 }
 
 .copy:active {
