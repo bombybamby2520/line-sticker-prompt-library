@@ -121,7 +121,7 @@ body {
 .title {
   margin: 0;
 
-  padding: 24px 42px;
+  padding: 20px 42px;
 
   background: var(--title-bg);
 
@@ -142,16 +142,16 @@ body {
   display: flex;
   flex-direction: column;
 
-  gap: 20px;
+  gap: 14px;
 
-  padding: 28px 42px 20px;
+  padding: 22px 42px 14px;
 }
 
 .option-group {
   display: flex;
   flex-direction: column;
 
-  gap: 8px;
+  gap: 6px;
 }
 
 .option-label {
@@ -167,7 +167,7 @@ body {
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  gap: 14px;
+  gap: 12px;
 }
 
 /* ---------------------------------
@@ -178,9 +178,9 @@ body {
   display: flex;
   align-items: center;
 
-  min-height: 58px;
+  min-height: 52px;
 
-  padding: 9px 18px;
+  padding: 7px 18px;
 
   background: var(--option-bg);
 
@@ -240,13 +240,14 @@ body {
 
   gap: 12px;
 
-  width: calc(100% - 84px);
+  width: 320px;
+  max-width: calc(100% - 84px);
 
-  min-height: 66px;
+  min-height: 58px;
 
-  margin: 4px 42px 32px;
+  margin: 4px auto 26px;
 
-  padding: 10px 24px;
+  padding: 8px 24px;
 
   border: none;
   outline: none;
@@ -361,24 +362,20 @@ body {
   }
 
   .prompt-options {
-    gap: 18px;
+    gap: 12px;
 
-    padding: 20px 16px 14px;
+    padding: 16px 16px 10px;
   }
 
   .option-group {
-    gap: 7px;
+    gap: 5px;
   }
 
   .option-label {
     font-size: 19px;
   }
 
-  /*
-    สำคัญ:
-    มือถือยังคง 2 คอลัมน์
-  */
-
+  /* มือถือยังคง 2 คอลัมน์ */
   .options {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
@@ -386,12 +383,11 @@ body {
   }
 
   .option {
-    min-height: 50px;
+    min-height: 46px;
 
-    padding: 7px 10px;
+    padding: 6px 10px;
 
     font-size: 16px;
-
     line-height: 1.2;
   }
 
@@ -403,13 +399,14 @@ body {
   }
 
   .copy {
-    width: calc(100% - 32px);
+    width: 70%;
+    max-width: 320px;
 
-    min-height: 56px;
+    min-height: 52px;
 
-    margin: 4px 16px 22px;
+    margin: 4px auto 20px;
 
-    padding: 10px 16px;
+    padding: 8px 16px;
 
     font-size: 18px;
   }
@@ -457,9 +454,9 @@ body {
   }
 
   .option {
-    min-height: 48px;
+    min-height: 44px;
 
-    padding: 6px 8px;
+    padding: 5px 8px;
 
     font-size: 14px;
   }
@@ -472,10 +469,13 @@ body {
   }
 
   .copy {
-    width: calc(100% - 24px);
+    width: 72%;
+    max-width: 300px;
 
-    margin-left: 12px;
-    margin-right: 12px;
+    min-height: 50px;
+
+    margin-left: auto;
+    margin-right: auto;
 
     font-size: 17px;
   }

@@ -60,11 +60,11 @@ function buildPrompt(item, options) {
   }
 
   if (background) {
-    details.push(`*${background}`);
+    details.push(`- ${background}`);
   }
 
   if (framing) {
-    details.push(`*${framing}`);
+    details.push(`- ${framing}`);
   }
 
   if (details.length > 0) {
