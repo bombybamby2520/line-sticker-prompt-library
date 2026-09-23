@@ -134,7 +134,7 @@ body {
 }
 
 /* ---------------------------------
-   Options container
+   Options
 --------------------------------- */
 
 .prompt-options {
@@ -322,7 +322,7 @@ body {
 
 @media (max-width: 700px) {
   .top {
-    padding: 28px 18px 12px;
+    padding: 26px 16px 10px;
   }
 
   .top h1 {
@@ -334,7 +334,7 @@ body {
   }
 
   .list {
-    padding: 14px 14px 40px;
+    padding: 14px 10px 36px;
 
     gap: 18px;
   }
@@ -344,15 +344,19 @@ body {
   }
 
   .title {
-    padding: 18px 22px;
+    padding: 17px 20px;
 
     font-size: 24px;
   }
 
   .prompt-options {
-    gap: 16px;
+    gap: 18px;
 
-    padding: 22px 22px 16px;
+    padding: 20px 16px 14px;
+  }
+
+  .option-group {
+    gap: 7px;
   }
 
   .option-label {
@@ -360,46 +364,109 @@ body {
   }
 
   /*
-    มือถือให้กลับมาเป็น 1 คอลัมน์
-    เพื่อไม่ให้ข้อความเบียดกัน
+    สำคัญ:
+    มือถือยังคง 2 คอลัมน์
   */
 
   .options {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 8px;
   }
 
   .option {
-    min-height: 52px;
+    min-height: 50px;
 
-    padding: 8px 16px;
+    padding: 7px 10px;
 
-    font-size: 17px;
+    font-size: 16px;
+
+    line-height: 1.2;
   }
 
   .option input {
-    width: 23px;
-    height: 23px;
+    width: 21px;
+    height: 21px;
 
-    margin-right: 11px;
+    margin-right: 8px;
   }
 
   .copy {
-    width: calc(100% - 44px);
+    width: calc(100% - 32px);
 
-    min-height: 58px;
+    min-height: 56px;
 
-    margin: 4px 22px 24px;
+    margin: 4px 16px 22px;
 
-    font-size: 19px;
+    padding: 10px 16px;
+
+    font-size: 18px;
   }
 
   .copy-icon {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
 
-    font-size: 23px;
+    font-size: 21px;
+  }
+}
+
+/* ---------------------------------
+   Small mobile
+--------------------------------- */
+
+@media (max-width: 390px) {
+  .top {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .top h1 {
+    font-size: 27px;
+  }
+
+  .sub {
+    font-size: 16px;
+  }
+
+  .list {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .title {
+    padding: 16px 17px;
+
+    font-size: 22px;
+  }
+
+  .prompt-options {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .option {
+    min-height: 48px;
+
+    padding: 6px 8px;
+
+    font-size: 14px;
+  }
+
+  .option input {
+    width: 19px;
+    height: 19px;
+
+    margin-right: 6px;
+  }
+
+  .copy {
+    width: calc(100% - 24px);
+
+    margin-left: 12px;
+    margin-right: 12px;
+
+    font-size: 17px;
   }
 }
 
