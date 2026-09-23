@@ -2,6 +2,7 @@
   --ink: #171b2b;
   --bg: #f6f8fd;
   --card-bg: #ffffff;
+  --card-outline: #c5d5fe;
   --title-bg: #eaf0ff;
 
   --option-bg: #f4f5f9;
@@ -101,7 +102,7 @@ body {
 
   background: var(--card-bg);
 
-  border: 1px solid #e4e7ee;
+  border: 2px solid var(--card-outline);
 
   border-radius: 28px;
 
