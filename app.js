@@ -81,7 +81,6 @@ async function copyText(text) {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (e) {
-    // fallback สำหรับเบราว์เซอร์ที่ไม่รองรับ clipboard API
     const ta = document.createElement("textarea");
 
     ta.value = text;
@@ -197,9 +196,18 @@ function makeCard(item, index) {
   );
 
   const btn = document.createElement("button");
+
   btn.type = "button";
   btn.className = "copy";
-  btn.textContent = "คัดลอก prompt";
+
+  const icon = document.createElement("span");
+  icon.className = "copy-icon";
+  icon.textContent = "▣";
+
+  const text = document.createElement("span");
+  text.textContent = "คัดลอก prompt";
+
+  btn.append(icon, text);
 
   let timer;
 
@@ -210,19 +218,24 @@ function makeCard(item, index) {
       framing: getSelectedValue(card, "framing"),
     };
 
-    const text = buildPrompt(item, selectedOptions);
-    const ok = await copyText(text);
+    const prompt = buildPrompt(item, selectedOptions);
+    const ok = await copyText(prompt);
 
-    btn.textContent = ok
-      ? "คัดลอกแล้ว"
-      : "คัดลอกไม่ได้ ลองกดค้างที่ข้อความ";
-
-    btn.classList.toggle("done", ok);
+    if (ok) {
+      icon.textContent = "✓";
+      text.textContent = "คัดลอกแล้ว";
+      btn.classList.add("done");
+    } else {
+      icon.textContent = "!";
+      text.textContent = "คัดลอกไม่ได้";
+      btn.classList.remove("done");
+    }
 
     clearTimeout(timer);
 
     timer = setTimeout(() => {
-      btn.textContent = "คัดลอก prompt";
+      icon.textContent = "▣";
+      text.textContent = "คัดลอก prompt";
       btn.classList.remove("done");
     }, 1600);
   });
