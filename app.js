@@ -20,8 +20,7 @@ const FRAMING_OPTIONS = {
 
 const ACTION_PROMPTS = {
   normal: "ปรับท่าทางและสีหน้า",
-  reference:
-    "ปรับท่าทางและสีหน้าให้เหมือนภาพที่ 2 โดยคงตัวละครจากภาพที่ 1",
+  reference: "ปรับท่าทางและสีหน้าให้เหมือนภาพที่ 2 โดยคงตัวละครจากภาพที่ 1",
 };
 
 const BACKGROUND_PROMPTS = {
@@ -105,13 +104,7 @@ async function copyText(text) {
   }
 }
 
-function makeOptionGroup(
-  title,
-  options,
-  selectedValue,
-  optionName,
-  cardIndex
-) {
+function makeOptionGroup(title, options, selectedValue, optionName, cardIndex) {
   const group = document.createElement("div");
   group.className = "option-group";
 
@@ -148,7 +141,7 @@ function makeOptionGroup(
 
 function getSelectedValue(card, optionName) {
   const input = card.querySelector(
-    `input[data-option="${optionName}"]:checked`
+    `input[data-option="${optionName}"]:checked`,
   );
 
   return input ? input.value : null;
@@ -171,8 +164,8 @@ function makeCard(item, index) {
       ACTION_OPTIONS,
       item.action || "normal",
       "action",
-      index
-    )
+      index,
+    ),
   );
 
   options.appendChild(
@@ -181,18 +174,12 @@ function makeCard(item, index) {
       BACKGROUND_OPTIONS,
       item.background || "white",
       "background",
-      index
-    )
+      index,
+    ),
   );
 
   options.appendChild(
-    makeOptionGroup(
-      "ขนาดภาพ",
-      FRAMING_OPTIONS,
-      "half",
-      "framing",
-      index
-    )
+    makeOptionGroup("ขนาดภาพ", FRAMING_OPTIONS, "half", "framing", index),
   );
 
   const btn = document.createElement("button");
@@ -202,7 +189,13 @@ function makeCard(item, index) {
 
   const icon = document.createElement("span");
   icon.className = "copy-icon";
-  icon.textContent = "▣";
+
+  icon.innerHTML = `
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="3" y="7" width="11" height="11" rx="2"></rect>
+    <rect x="10" y="2" width="11" height="11" rx="2"></rect>
+  </svg>
+`;
 
   const text = document.createElement("span");
   text.textContent = "คัดลอก prompt";
@@ -222,7 +215,7 @@ function makeCard(item, index) {
     const ok = await copyText(prompt);
 
     if (ok) {
-      icon.textContent = "✓";
+      icon.innerHTML = "✓";
       text.textContent = "คัดลอกแล้ว";
       btn.classList.add("done");
     } else {
@@ -234,7 +227,13 @@ function makeCard(item, index) {
     clearTimeout(timer);
 
     timer = setTimeout(() => {
-      icon.textContent = "▣";
+      icon.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3" y="7" width="11" height="11" rx="2"></rect>
+          <rect x="10" y="2" width="11" height="11" rx="2"></rect>
+        </svg>
+`;
+
       text.textContent = "คัดลอก prompt";
       btn.classList.remove("done");
     }, 1600);
