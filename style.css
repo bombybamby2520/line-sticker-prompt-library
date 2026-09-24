@@ -73,6 +73,13 @@ body {
   line-height: 1.4;
 }
 
+.version {
+  color: #a0a6b5;
+  font-size: 0.5em;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
 /* ---------------------------------
    Prompt list
 --------------------------------- */
