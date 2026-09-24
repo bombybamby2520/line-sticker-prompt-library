@@ -202,8 +202,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: 320px;
-  max-width: calc(100% - 84px);
+  width: 260px;
+  max-width: calc(100% - 32px);
   min-height: 58px;
   margin: 4px auto 26px;
   padding: 8px 24px;
@@ -338,8 +338,8 @@ body {
   }
 
   .copy {
-    width: 70%;
-    max-width: 320px;
+    width: 260px;
+    max-width: calc(100% - 32px);
     min-height: 52px;
     margin: 4px auto 20px;
     padding: 8px 16px;
@@ -408,8 +408,8 @@ body {
   }
 
   .copy {
-    width: 72%;
-    max-width: 300px;
+    width: 260px;
+    max-width: calc(100% - 24px);
     min-height: 50px;
     margin-left: auto;
     margin-right: auto;
