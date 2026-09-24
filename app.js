@@ -3,31 +3,8 @@ const list = document.getElementById("list");
 document.getElementById("count").textContent =
   PROMPTS.length + " รายการ แตะปุ่มเพื่อคัดลอก";
 
-const BACKGROUND_OPTIONS = {
-  white: "ขาวล้วน",
-  prompt: "ตาม Prompt",
-};
-
-const FRAMING_OPTIONS = {
-  half: "ครึ่งตัว",
-  full: "เต็มตัว",
-};
-
-const BACKGROUND_PROMPTS = {
-  white: "ฉากหลังสีขาวล้วน",
-  prompt: "ฉากหลังตาม Prompt",
-};
-
-const FRAMING_PROMPTS = {
-  half: "ภาพครึ่งตัว",
-  full: "ภาพเต็มตัว",
-};
-
-function buildPrompt(item, options) {
+function buildPrompt(item) {
   const parts = [];
-
-  const background = BACKGROUND_PROMPTS[options.background];
-  const framing = FRAMING_PROMPTS[options.framing];
 
   parts.push("ปรับท่าทางและสีหน้า");
 
@@ -46,13 +23,8 @@ function buildPrompt(item, options) {
     details.push(item.keep.trim());
   }
 
-  if (background) {
-    details.push(`- ${background}`);
-  }
-
-  if (framing) {
-    details.push(`- ${framing}`);
-  }
+  details.push("- ฉากหลังสีขาวล้วน");
+  details.push("- ภาพครึ่งตัว");
 
   if (details.length > 0) {
     parts.push("");
@@ -71,10 +43,12 @@ async function copyText(text) {
 
     ta.value = text;
     ta.setAttribute("readonly", "");
+
     ta.style.position = "fixed";
     ta.style.opacity = "0";
 
     document.body.appendChild(ta);
+
     ta.select();
 
     let ok = false;
@@ -91,49 +65,6 @@ async function copyText(text) {
   }
 }
 
-function makeOptionGroup(title, options, selectedValue, optionName, cardIndex) {
-  const group = document.createElement("div");
-  group.className = "option-group";
-
-  const heading = document.createElement("div");
-  heading.className = "option-label";
-  heading.textContent = title;
-
-  const choices = document.createElement("div");
-  choices.className = "options";
-
-  Object.entries(options).forEach(([value, text]) => {
-    const label = document.createElement("label");
-    label.className = "option";
-
-    const input = document.createElement("input");
-
-    input.type = "radio";
-    input.name = `${optionName}-${cardIndex}`;
-    input.value = value;
-    input.dataset.option = optionName;
-    input.checked = value === selectedValue;
-
-    const span = document.createElement("span");
-    span.textContent = text;
-
-    label.append(input, span);
-    choices.appendChild(label);
-  });
-
-  group.append(heading, choices);
-
-  return group;
-}
-
-function getSelectedValue(card, optionName) {
-  const input = card.querySelector(
-    `input[data-option="${optionName}"]:checked`,
-  );
-
-  return input ? input.value : null;
-}
-
 function makeCard(item, index) {
   const card = document.createElement("article");
   card.className = "card";
@@ -141,29 +72,6 @@ function makeCard(item, index) {
   const title = document.createElement("h2");
   title.className = "title";
   title.textContent = `${index + 1}. ${item.title}`;
-
-  const options = document.createElement("div");
-  options.className = "prompt-options";
-
-  options.appendChild(
-    makeOptionGroup(
-      "ฉากหลัง",
-      BACKGROUND_OPTIONS,
-      item.background || "white",
-      "background",
-      index,
-    ),
-  );
-
-  options.appendChild(
-    makeOptionGroup(
-      "ขนาดภาพ",
-      FRAMING_OPTIONS,
-      item.framing || "half",
-      "framing",
-      index,
-    ),
-  );
 
   const btn = document.createElement("button");
 
@@ -181,19 +89,14 @@ function makeCard(item, index) {
   `;
 
   const text = document.createElement("span");
-  text.textContent = "คัดลอก prompt";
+  text.textContent = "คัดลอก Prompt";
 
   btn.append(icon, text);
 
   let timer;
 
   btn.addEventListener("click", async () => {
-    const selectedOptions = {
-      background: getSelectedValue(card, "background"),
-      framing: getSelectedValue(card, "framing"),
-    };
-
-    const prompt = buildPrompt(item, selectedOptions);
+    const prompt = buildPrompt(item);
     const ok = await copyText(prompt);
 
     if (ok) {
@@ -216,12 +119,12 @@ function makeCard(item, index) {
         </svg>
       `;
 
-      text.textContent = "คัดลอก prompt";
+      text.textContent = "คัดลอก Prompt";
       btn.classList.remove("done");
     }, 1600);
   });
 
-  card.append(title, options, btn);
+  card.append(title, btn);
 
   return card;
 }

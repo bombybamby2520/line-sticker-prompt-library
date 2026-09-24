@@ -5,9 +5,6 @@
   --card-outline: #c5d5fe;
   --title-bg: #eaf0ff;
 
-  --option-bg: #f4f5f9;
-  --option-selected: #e4f8ee;
-
   --line-green: #20c86a;
   --line-green-dark: #18b45c;
 
@@ -27,11 +24,14 @@ html {
 
 body {
   margin: 0;
+
   background: var(--bg);
   color: var(--ink);
+
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.5;
+
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -43,45 +43,58 @@ body {
 .top {
   width: 100%;
   max-width: 1100px;
+
   margin: 0 auto;
+
   padding: 34px 32px 12px;
 }
 
 .top h1 {
   margin: 0;
+
   font-family: var(--font-title);
   font-weight: 700;
+
   font-size: 38px;
   line-height: 1.2;
+
   letter-spacing: -0.5px;
 }
 
 .sub {
   margin: 8px 0 0;
+
   color: var(--muted);
+
   font-size: 21px;
   line-height: 1.4;
 }
 
 .version {
   color: #a0a6b5;
+
   font-size: 0.5em;
   font-weight: 500;
+
   letter-spacing: 0;
 }
 
 /* ---------------------------------
-   Prompt list
+   Prompt List
 --------------------------------- */
 
 .list {
   width: 100%;
   max-width: 1100px;
+
   margin: 0 auto;
+
   padding: 18px 32px 50px;
+
   display: flex;
   flex-direction: column;
-  gap: 24px;
+
+  gap: 20px;
 }
 
 /* ---------------------------------
@@ -90,13 +103,19 @@ body {
 
 .card {
   width: 100%;
+
   overflow: hidden;
+
   background: var(--card-bg);
+
   border: 2px solid var(--card-outline);
-  border-radius: 28px;
+
+  border-radius: 24px;
+
   box-shadow:
     0 8px 24px rgba(40, 50, 80, 0.06),
     0 2px 6px rgba(40, 50, 80, 0.03);
+
   display: flex;
   flex-direction: column;
 }
@@ -107,116 +126,57 @@ body {
 
 .title {
   margin: 0;
-  padding: 20px 42px;
+
+  padding: 16px 36px;
+
   background: var(--title-bg);
+
   font-family: var(--font-title);
   font-weight: 700;
-  font-size: 30px;
+
+  font-size: 28px;
   line-height: 1.25;
+
   letter-spacing: -0.3px;
 }
 
 /* ---------------------------------
-   Options
---------------------------------- */
-
-.prompt-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px 24px;
-  padding: 20px 42px 10px;
-}
-
-.option-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.option-label {
-  font-family: var(--font-title);
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 1.3;
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-/* ---------------------------------
-   Option
---------------------------------- */
-
-.option {
-  display: flex;
-  align-items: center;
-  min-height: 52px;
-  padding: 7px 18px;
-  background: var(--option-bg);
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 20px;
-  line-height: 1.25;
-  transition:
-    background-color 0.15s ease,
-    transform 0.08s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.option:hover {
-  background: #eef0f5;
-}
-
-.option:active {
-  transform: scale(0.985);
-}
-
-.option input {
-  flex: 0 0 auto;
-  width: 27px;
-  height: 27px;
-  margin: 0 13px 0 0;
-  accent-color: var(--line-green);
-  cursor: pointer;
-}
-
-.option:has(input:checked) {
-  background: var(--option-selected);
-}
-
-.option span {
-  flex: 1;
-  color: var(--ink);
-}
-
-/* ---------------------------------
-   Copy button
+   Copy Button
 --------------------------------- */
 
 .copy {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  width: 260px;
+
+  gap: 10px;
+
+  width: max-content;
   max-width: calc(100% - 32px);
-  min-height: 58px;
-  margin: 4px auto 26px;
-  padding: 8px 24px;
+
+  min-height: 46px;
+
+  margin: 18px auto 18px;
+
+  padding: 6px 22px;
+
   border: none;
   outline: none;
+
   background: var(--line-green);
   color: #ffffff;
+
   border-radius: 999px;
+
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 21px;
+
+  font-size: 18px;
+
   cursor: pointer;
+
   -webkit-tap-highlight-color: transparent;
+
   transition:
     background-color 0.15s ease,
     transform 0.08s ease;
@@ -234,23 +194,35 @@ body {
   background: var(--line-green-dark);
 }
 
+/* ---------------------------------
+   Copy Icon
+--------------------------------- */
+
 .copy-icon {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+
+  width: 27px;
+  height: 27px;
+
   color: #ffffff;
-  font-size: 26px;
+
+  font-size: 24px;
   line-height: 1;
 }
 
 .copy-icon svg {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
+
   fill: none;
+
   stroke: currentColor;
+
   stroke-width: 2;
+
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -293,68 +265,45 @@ body {
 
   .list {
     padding: 14px 10px 36px;
-    gap: 18px;
+
+    gap: 16px;
   }
 
   .card {
-    border-radius: 22px;
+    border-radius: 20px;
   }
 
   .title {
-    padding: 17px 20px;
+    padding: 13px 20px;
+
     font-size: 24px;
   }
 
-  .prompt-options {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-    padding: 16px 16px 8px;
-  }
-
-  .option-group {
-    gap: 5px;
-  }
-
-  .option-label {
-    font-size: 19px;
-  }
-
-  .options {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 7px;
-  }
-
-  .option {
-    min-height: 46px;
-    padding: 6px 8px;
-    font-size: 14px;
-    line-height: 1.2;
-  }
-
-  .option input {
-    width: 19px;
-    height: 19px;
-    margin-right: 6px;
-  }
-
   .copy {
-    width: 260px;
-    max-width: calc(100% - 32px);
-    min-height: 52px;
-    margin: 4px auto 20px;
-    padding: 8px 16px;
-    font-size: 18px;
+    min-height: 44px;
+
+    margin: 14px auto 14px;
+
+    padding: 6px 19px;
+
+    font-size: 17px;
   }
 
   .copy-icon {
     width: 24px;
     height: 24px;
+
     font-size: 21px;
+  }
+
+  .copy-icon svg {
+    width: 24px;
+    height: 24px;
   }
 }
 
 /* ---------------------------------
-   Small mobile
+   Small Mobile
 --------------------------------- */
 
 @media (max-width: 390px) {
@@ -374,55 +323,42 @@ body {
   .list {
     padding-left: 7px;
     padding-right: 7px;
+
+    gap: 14px;
   }
 
   .title {
-    padding: 16px 17px;
+    padding: 12px 17px;
+
     font-size: 22px;
   }
 
-  .prompt-options {
-    gap: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .option-label {
-    font-size: 17px;
-  }
-
-  .options {
-    gap: 5px;
-  }
-
-  .option {
-    min-height: 44px;
-    padding: 5px 6px;
-    font-size: 13px;
-  }
-
-  .option input {
-    width: 17px;
-    height: 17px;
-    margin-right: 5px;
-  }
-
   .copy {
-    width: 260px;
-    max-width: calc(100% - 24px);
-    min-height: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 17px;
+    min-height: 42px;
+
+    margin: 13px auto 13px;
+
+    padding: 6px 17px;
+
+    font-size: 16px;
+  }
+
+  .copy-icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .copy-icon svg {
+    width: 23px;
+    height: 23px;
   }
 }
 
 /* ---------------------------------
-   Reduced motion
+   Reduced Motion
 --------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .option,
   .copy {
     transition: none;
   }
