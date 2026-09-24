@@ -3,11 +3,6 @@ const list = document.getElementById("list");
 document.getElementById("count").textContent =
   PROMPTS.length + " รายการ แตะปุ่มเพื่อคัดลอก";
 
-const ACTION_OPTIONS = {
-  normal: "ปกติ",
-  reference: "อ้างอิงภาพที่ 2",
-};
-
 const BACKGROUND_OPTIONS = {
   white: "ขาวล้วน",
   prompt: "ตาม Prompt",
@@ -16,11 +11,6 @@ const BACKGROUND_OPTIONS = {
 const FRAMING_OPTIONS = {
   half: "ครึ่งตัว",
   full: "เต็มตัว",
-};
-
-const ACTION_PROMPTS = {
-  normal: "ปรับท่าทางและสีหน้า",
-  reference: "ปรับท่าทางและสีหน้าให้เหมือนภาพที่ 2 โดยคงตัวละครจากภาพที่ 1",
 };
 
 const BACKGROUND_PROMPTS = {
@@ -36,13 +26,10 @@ const FRAMING_PROMPTS = {
 function buildPrompt(item, options) {
   const parts = [];
 
-  const action = ACTION_PROMPTS[options.action];
   const background = BACKGROUND_PROMPTS[options.background];
   const framing = FRAMING_PROMPTS[options.framing];
 
-  if (action) {
-    parts.push(action);
-  }
+  parts.push("ปรับท่าทางและสีหน้า");
 
   parts.push("");
 
@@ -160,16 +147,6 @@ function makeCard(item, index) {
 
   options.appendChild(
     makeOptionGroup(
-      "วิธีปรับภาพ",
-      ACTION_OPTIONS,
-      item.action || "normal",
-      "action",
-      index,
-    ),
-  );
-
-  options.appendChild(
-    makeOptionGroup(
       "ฉากหลัง",
       BACKGROUND_OPTIONS,
       item.background || "white",
@@ -179,7 +156,13 @@ function makeCard(item, index) {
   );
 
   options.appendChild(
-    makeOptionGroup("ขนาดภาพ", FRAMING_OPTIONS, "half", "framing", index),
+    makeOptionGroup(
+      "ขนาดภาพ",
+      FRAMING_OPTIONS,
+      item.framing || "half",
+      "framing",
+      index,
+    ),
   );
 
   const btn = document.createElement("button");
@@ -191,11 +174,11 @@ function makeCard(item, index) {
   icon.className = "copy-icon";
 
   icon.innerHTML = `
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="7" width="11" height="11" rx="2"></rect>
-    <rect x="10" y="2" width="11" height="11" rx="2"></rect>
-  </svg>
-`;
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="7" width="11" height="11" rx="2"></rect>
+      <rect x="10" y="2" width="11" height="11" rx="2"></rect>
+    </svg>
+  `;
 
   const text = document.createElement("span");
   text.textContent = "คัดลอก prompt";
@@ -206,7 +189,6 @@ function makeCard(item, index) {
 
   btn.addEventListener("click", async () => {
     const selectedOptions = {
-      action: getSelectedValue(card, "action"),
       background: getSelectedValue(card, "background"),
       framing: getSelectedValue(card, "framing"),
     };
@@ -232,7 +214,7 @@ function makeCard(item, index) {
           <rect x="3" y="7" width="11" height="11" rx="2"></rect>
           <rect x="10" y="2" width="11" height="11" rx="2"></rect>
         </svg>
-`;
+      `;
 
       text.textContent = "คัดลอก prompt";
       btn.classList.remove("done");
