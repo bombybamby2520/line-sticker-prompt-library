@@ -1,24 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#e9ecf5">
-  <title>คลังพรอมต์สติกเกอร์</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="top">
-    <h1>คลังพรอมต์สติกเกอร์</h1>
-    <p id="count" class="sub"></p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#e9ecf5" />
+    <title>คลังพรอมต์สติกเกอร์</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>คลังพรอมต์สติกเกอร์</h1>
+      <div class="sub">
+        <span id="count">6 รายการ แตะปุ่มเพื่อคัดลอก</span>
+        <span class="version">· v1.0.0</span>
+      </div>
+    </header>
 
-  <main id="list" class="list" aria-label="รายการพรอมต์"></main>
+    <main id="list" class="list" aria-label="รายการพรอมต์"></main>
 
-  <script src="prompts.js"></script>
-  <script src="app.js"></script>
-</body>
+    <script src="prompts.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

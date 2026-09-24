@@ -1,8 +1,5 @@
 const list = document.getElementById("list");
 
-document.getElementById("count").textContent =
-  PROMPTS.length + " รายการ แตะปุ่มเพื่อคัดลอก";
-
 const ACTION_OPTIONS = {
   normal: "ปกติ",
   reference: "อ้างอิงภาพที่ 2",
