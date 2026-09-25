@@ -14,15 +14,20 @@ function pick(field) {
 
 function buildPrompt(item) {
   const parts = [];
+  // prettier-ignore
+  parts.push(lang === "en" ? "Adjust pose and facial expression" : "ปรับท่าทางและสีหน้า");
 
-  parts.push("ปรับท่าทางและสีหน้า");
   parts.push("");
+
   parts.push("Guide:");
   parts.push(pick(item.guide).trim());
 
   const details = [];
+
   const detailText = pick(item.details).trim();
-  if (detailText) details.push(detailText);
+  if (detailText) {
+    details.push(detailText);
+  }
 
   if (item.keep && item.keep.trim()) {
     details.push(item.keep.trim());
@@ -83,20 +88,10 @@ function makeCard(item, index) {
   btn.type = "button";
   btn.className = "copy";
 
-  const icon = document.createElement("span");
-  icon.className = "copy-icon";
-
-  icon.innerHTML = `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="7" width="11" height="11" rx="2"></rect>
-      <rect x="10" y="2" width="11" height="11" rx="2"></rect>
-    </svg>
-  `;
-
   const text = document.createElement("span");
-  text.textContent = "คัดลอก Prompt";
+  text.textContent = "📋 ก๊อปเลย";
 
-  btn.append(icon, text);
+  btn.append(text);
 
   let timer;
 
@@ -105,26 +100,17 @@ function makeCard(item, index) {
     const ok = await copyText(prompt);
 
     if (ok) {
-      icon.innerHTML = "✓";
-      text.textContent = "คัดลอกแล้ว";
+      text.textContent = "ก๊อปแล้ว";
       btn.classList.add("done");
     } else {
-      icon.textContent = "!";
-      text.textContent = "คัดลอกไม่ได้";
+      text.textContent = "ก๊อปไม่ได้";
       btn.classList.remove("done");
     }
 
     clearTimeout(timer);
 
     timer = setTimeout(() => {
-      icon.innerHTML = `
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <rect x="3" y="7" width="11" height="11" rx="2"></rect>
-          <rect x="10" y="2" width="11" height="11" rx="2"></rect>
-        </svg>
-      `;
-
-      text.textContent = "คัดลอก Prompt";
+      text.textContent = "📋 ก๊อปเลย";
       btn.classList.remove("done");
     }, 1600);
   });
@@ -134,6 +120,13 @@ function makeCard(item, index) {
   return card;
 }
 
+PROMPTS.forEach((item, index) => {
+  list.appendChild(makeCard(item, index));
+});
+
+// ---------------------------------
+// สลับภาษา (ปุ่มคู่ TH / EN)
+// ---------------------------------
 function setLang(newLang) {
   lang = newLang;
   localStorage.setItem("lang", lang);
@@ -151,7 +144,3 @@ if (thBtn && enBtn) {
   enBtn.addEventListener("click", () => setLang("en"));
   setLang(lang);
 }
-
-PROMPTS.forEach((item, index) => {
-  list.appendChild(makeCard(item, index));
-});
