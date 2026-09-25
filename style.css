@@ -79,6 +79,32 @@ body {
   letter-spacing: 0;
 }
 
+.lang-switch {
+  display: inline-flex;
+  margin-top: 10px;
+  padding: 3px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+}
+
+.lang-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: var(--ink);
+  color: #fff;
+}
+
 /* ---------------------------------
    Prompt List
 --------------------------------- */

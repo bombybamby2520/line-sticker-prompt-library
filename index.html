@@ -10,10 +10,8 @@
     <meta name="theme-color" content="#e9ecf5" />
 
     <title>คลังพรอมต์สติกเกอร์</title>
-
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐻</text></svg>" />
+    <!-- prettier-ignore -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐻</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
@@ -34,6 +32,11 @@
       </h1>
 
       <p id="count" class="sub"></p>
+
+      <div class="lang-switch" role="group">
+        <button id="lang-th" type="button" class="lang-btn">ไทย</button>
+        <button id="lang-en" type="button" class="lang-btn">EN</button>
+      </div>
     </header>
 
     <main id="list" class="list" aria-label="รายการพรอมต์"></main>

@@ -3,21 +3,26 @@ const list = document.getElementById("list");
 document.getElementById("count").textContent =
   PROMPTS.length + " รายการ แตะปุ่มเพื่อคัดลอก";
 
+let lang = localStorage.getItem("lang") || "th";
+
+// เลือกข้อความตามภาษาปัจจุบัน รองรับทั้ง string เดิม และ object {th, en}
+function pick(field) {
+  if (!field) return "";
+  if (typeof field === "string") return field; // ชุดที่ยังไม่แปล ใช้ตามเดิม
+  return field[lang] || field.th || field.en || ""; // มี fallback กันพลาด
+}
+
 function buildPrompt(item) {
   const parts = [];
 
   parts.push("ปรับท่าทางและสีหน้า");
-
   parts.push("");
-
   parts.push("Guide:");
-  parts.push(item.guide.trim());
+  parts.push(pick(item.guide).trim());
 
   const details = [];
-
-  if (item.details && item.details.trim()) {
-    details.push(item.details.trim());
-  }
+  const detailText = pick(item.details).trim();
+  if (detailText) details.push(detailText);
 
   if (item.keep && item.keep.trim()) {
     details.push(item.keep.trim());
@@ -127,6 +132,24 @@ function makeCard(item, index) {
   card.append(title, btn);
 
   return card;
+}
+
+function setLang(newLang) {
+  lang = newLang;
+  localStorage.setItem("lang", lang);
+
+  const thBtn = document.getElementById("lang-th");
+  const enBtn = document.getElementById("lang-en");
+  if (thBtn) thBtn.classList.toggle("active", lang === "th");
+  if (enBtn) enBtn.classList.toggle("active", lang === "en");
+}
+
+const thBtn = document.getElementById("lang-th");
+const enBtn = document.getElementById("lang-en");
+if (thBtn && enBtn) {
+  thBtn.addEventListener("click", () => setLang("th"));
+  enBtn.addEventListener("click", () => setLang("en"));
+  setLang(lang);
 }
 
 PROMPTS.forEach((item, index) => {
