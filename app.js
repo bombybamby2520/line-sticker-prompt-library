@@ -33,8 +33,8 @@ function buildPrompt(item) {
     details.push(item.keep.trim());
   }
 
-  details.push("- ฉากหลังสีขาวล้วน");
-  details.push("- ภาพครึ่งตัว");
+    details.push(lang === "en" ? "- Plain white background" : "- ฉากหลังสีขาวล้วน");
+    details.push(lang === "en" ? "- Half-body shot" : "- ภาพครึ่งตัว");
 
   if (details.length > 0) {
     parts.push("");

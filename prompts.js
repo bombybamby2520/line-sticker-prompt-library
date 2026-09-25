@@ -1152,31 +1152,4 @@ const PROMPTS = [
       `),
     },
   },
-
-  // Image 41
-  {
-    title: "ชูนิ้วโป้ง",
-    guide: {
-      th: dedent(`
-        ยืนตัวตรง ลำตัวหันตรงมาข้างหน้า ไหล่ผ่อนคลาย
-        ศีรษะตั้งตรง สายตามองตรงเข้าหากล้อง
-        สีหน้ายิ้มมั่นใจ ริมฝีปากปิด สื่ออารมณ์สดใส
-        แขนขวายกขึ้นงอศอก ชูนิ้วโป้งระดับอก
-        แขนซ้ายงอศอก เท้าสะเอว
-      `),
-      en: dedent(`
-        Standing upright, body facing forward, shoulders relaxed
-        Head upright, eyes looking straight at the camera
-        Confident smile, lips closed, cheerful expression
-        Right arm raised and bent at the elbow, thumbs up at chest level
-        Left arm bent at the elbow, hand on the hip
-      `),
-    },
-    details: {
-      th: dedent(`
-      `),
-      en: dedent(`
-      `),
-    },
-  },
 ];
