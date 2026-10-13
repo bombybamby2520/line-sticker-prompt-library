@@ -185,3 +185,21 @@ if (animateList) {
     animateList.appendChild(makeAnimateCard(item, index));
   });
 }
+
+const tabStickerBtn = document.getElementById("tab-sticker");
+const tabAnimateBtn = document.getElementById("tab-animate");
+const stickerSection = document.getElementById("list");
+const animateSection = document.getElementById("animate-list");
+
+function setTab(tab) {
+  stickerSection.hidden = tab !== "sticker";
+  animateSection.hidden = tab !== "animate";
+  tabStickerBtn.classList.toggle("active", tab === "sticker");
+  tabAnimateBtn.classList.toggle("active", tab === "animate");
+}
+
+if (tabStickerBtn && tabAnimateBtn) {
+  tabStickerBtn.addEventListener("click", () => setTab("sticker"));
+  tabAnimateBtn.addEventListener("click", () => setTab("animate"));
+  setTab("sticker"); // เปิดหน้า sticker เป็นค่าเริ่มต้น
+}

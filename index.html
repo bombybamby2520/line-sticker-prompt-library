@@ -37,18 +37,19 @@
         <button id="lang-th" type="button" class="lang-btn">ไทย</button>
         <button id="lang-en" type="button" class="lang-btn">EN</button>
       </div>
+
+      <div class="tab-switch" role="group">
+        <button id="tab-sticker" type="button" class="tab-btn">Sticker</button>
+        <button id="tab-animate" type="button" class="tab-btn">Animate</button>
+      </div>
     </header>
 
     <main id="list" class="list" aria-label="รายการพรอมต์"></main>
-
-    <header class="top">
-      <h1>Animate</h1>
-      <p class="sub">EN prompt สำหรับ MiniMax H3</p>
-    </header>
-
-    <main id="animate-list" class="list" aria-label="Animate prompts"></main>
+    <!-- prettier-ignore -->
+    <main id="animate-list" class="list" aria-label="Animate prompts" hidden></main>
 
     <script src="prompts.js"></script>
+    <script src="animate-prompts.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

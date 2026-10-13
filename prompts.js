@@ -4,7 +4,7 @@
 const PREFIX = "";
 const SUFFIX = "";
 
-// ตัวช่วยจัดระยะข้อความ
+// ตัวช่วยจัดระยะข้อความ (ใช้ร่วมกับ animate-prompts.js ด้วย ต้องโหลดไฟล์นี้ก่อนเสมอ)
 function dedent(str) {
   const lines = str
     .replace(/^\n/, "")
@@ -1152,14 +1152,4 @@ const PROMPTS = [
       `),
     },
   },
-];
-
-const ANIMATE_PROMPTS = [
-  {
-    title: "Example Pose",
-    prompt: dedent(`
-      The character slowly nods and smiles at the camera, hair swaying gently.
-    `),
-  },
-  // เพิ่มชุดถัดไปแบบนี้ได้เลย
 ];
