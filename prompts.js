@@ -1153,3 +1153,13 @@ const PROMPTS = [
     },
   },
 ];
+
+const ANIMATE_PROMPTS = [
+  {
+    title: "Example Pose",
+    prompt: dedent(`
+      The character slowly nods and smiles at the camera, hair swaying gently.
+    `),
+  },
+  // เพิ่มชุดถัดไปแบบนี้ได้เลย
+];

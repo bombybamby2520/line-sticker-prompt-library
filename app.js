@@ -33,8 +33,10 @@ function buildPrompt(item) {
     details.push(item.keep.trim());
   }
 
-    details.push(lang === "en" ? "- Plain white background" : "- ฉากหลังสีขาวล้วน");
-    details.push(lang === "en" ? "- Half-body shot" : "- ภาพครึ่งตัว");
+  details.push(
+    lang === "en" ? "- Plain white background" : "- ฉากหลังสีขาวล้วน",
+  );
+  details.push(lang === "en" ? "- Half-body shot" : "- ภาพครึ่งตัว");
 
   if (details.length > 0) {
     parts.push("");
@@ -143,4 +145,43 @@ if (thBtn && enBtn) {
   thBtn.addEventListener("click", () => setLang("th"));
   enBtn.addEventListener("click", () => setLang("en"));
   setLang(lang);
+}
+
+function makeAnimateCard(item, index) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const title = document.createElement("h2");
+  title.className = "title";
+  title.textContent = `${index + 1}. ${item.title}`;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "copy";
+
+  const text = document.createElement("span");
+  text.textContent = "📋 Copy Prompt";
+  btn.append(text);
+
+  let timer;
+  btn.addEventListener("click", async () => {
+    const ok = await copyText(item.prompt.trim());
+    text.textContent = ok ? "Copied!" : "Copy failed";
+    btn.classList.toggle("done", ok);
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      text.textContent = "📋 Copy Prompt";
+      btn.classList.remove("done");
+    }, 1600);
+  });
+
+  card.append(title, btn);
+  return card;
+}
+
+const animateList = document.getElementById("animate-list");
+if (animateList) {
+  ANIMATE_PROMPTS.forEach((item, index) => {
+    animateList.appendChild(makeAnimateCard(item, index));
+  });
 }
