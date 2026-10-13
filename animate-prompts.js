@@ -2,7 +2,7 @@ const ANIMATE_PROMPTS = [
   {
     title: "เชคสวย",
     prompt: dedent(`
-She gazes into the handheld mirror,
+    She gazes into the handheld mirror,
     gently tilting it from side to side
     as she checks her reflection.
 
